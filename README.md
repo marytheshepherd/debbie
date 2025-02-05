@@ -1,6 +1,7 @@
 # debbie
 This project is built in fulfillment of the requirements for the module ET1024-2420: Introduction to Engineering &amp; Design CA3. 
 It aims to develop a desk-stationed companion robot, Debbie, designed to combat loneliness in the comfort of our homes.  
+  
 __How can we help individuals in Singapore combat loneliness through the use of technology? (UNSDG 3)__
 
 ## Component Lists
