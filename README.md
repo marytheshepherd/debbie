@@ -29,6 +29,7 @@ Compilation error: ESP8266_Lib.h: No such file or directory
 ```
 download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
 paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
+If it doesn't work, you can simply download "Blynk.zip" and extract it to C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\  
 
 
 [!CAUTION]  
