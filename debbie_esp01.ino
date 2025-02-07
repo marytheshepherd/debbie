@@ -5,9 +5,10 @@
 
 #include <DHT.h>
 
-#define BLYNK_TEMPLATE_ID "TMPL6D_Ndf1NJ"
-#define BLYNK_TEMPLATE_NAME "debbie8266"
-#define BLYNK_AUTH_TOKEN "h6AI52r9E2B-WdBFWrVzLU39LppFhuRV"
+//Blynk credentials
+#define BLYNK_TEMPLATE_ID ""
+#define BLYNK_TEMPLATE_NAME ""
+#define BLYNK_AUTH_TOKEN ""
 #include <ESP8266_Lib.h>
 #include <BlynkSimpleShieldEsp8266.h>
 
@@ -44,8 +45,8 @@ SoftwareSerial EspSerial(12, 13);
 ESP8266 wifi(&EspSerial);
 
 //input your mobile hotspot
-char ssid[] = "KKwan";
-char pass[] = "K22/01/07"; 
+char ssid[] = "";
+char pass[] = ""; 
 
 unsigned long previousMillis = 0;
 const long interval = 2000;
