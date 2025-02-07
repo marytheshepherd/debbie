@@ -16,12 +16,20 @@ Buzzer
 ## Usage
 1) Test all the hardware seperately.  
 2) Create Blynk account >> template >> Hardware: ESP8266 | Connection type: WiFi >> New Devices  
-3) debbie_esp01.ino  
+3) debbie_esp01.ino
+4) Change Blynk template id, auth and personal hotspot  
 
-## Notes
-Change Blynk template id, auth and personal hotspot  
+## Common Error
+```
+Compilation error: ESP8266_Lib.h: No such file or directory
+```
+download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
+paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
+
+[!Caution]
 The code is currently at its maximum and will overload if added more  
 Beware of damaging your components  
+
 
 
 
