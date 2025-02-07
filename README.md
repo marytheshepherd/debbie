@@ -29,8 +29,8 @@ Compilation error: ESP8266_Lib.h: No such file or directory
 ```
 download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
 paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
-If it doesn't work, you can simply download "Blynk.zip" and extract it to C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\  
 
+If it doesn't work, you can simply download "Blynk.zip" and extract it to C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\  
 
 [!CAUTION]  
 The ESP8266 (ESP-01) baud rate *must* be set to 9600, while the Serial.begin()/Serial Monitor baud rates can be either 9600 or 115200.
