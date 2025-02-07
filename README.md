@@ -17,18 +17,25 @@ Buzzer
 1) Test all the hardware seperately.  
 2) Create Blynk account >> template >> Hardware: ESP8266 | Connection type: WiFi >> New Devices  
 3) debbie_esp01.ino
-4) Change Blynk template id, auth and personal hotspot  
+4) Blynk template id, name, auth token and personal hotspot  
 
 ## Common Error
+```
+ESP is not responding
+```
+Change SoftwareSerial EspSerial(12, 13); to different ports e.g. (2,3)  
 ```
 Compilation error: ESP8266_Lib.h: No such file or directory
 ```
 download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
 paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
 
-[!Caution]
+
+[!CAUTION]  
+The ESP8266 (ESP-01) baud rate *must* be set to 9600, while the Serial.begin()/Serial Monitor baud rates can be either 9600 or 115200.
 The code is currently at its maximum and will overload if added more  
 Beware of damaging your components  
+
 
 
 
