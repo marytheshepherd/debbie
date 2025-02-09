@@ -50,14 +50,10 @@ DHT dht(DHT11_PIN, DHT11);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long previousMillis = 0;
 const long interval = 2000;
-int lightA =0;
 int lightB =0;
 bool lightChanged = false;
-bool lightChanged2 = false;
-void lightInterrupt2(void);
 void lightInterrupt(void);
 unsigned long lastInterruptTime = 0;
-unsigned long lastInterruptTime2 = 0;
 unsigned long debounceDelay = 200;
 unsigned long debounceDelay2 = 200;
 unsigned long startMillis;   
@@ -70,7 +66,7 @@ void setup() {
 
     lcd.init();
     lcd.backlight();
-    updateLCD("Starting..."); //try running for introduction
+    scrollText("Starting..."); //try updatelcd or lcdprint if fail
     delay(2000);
 
     EspSerial.begin(ESP8266_BAUD);
@@ -115,18 +111,34 @@ void updateSensors() {
     int D2 = Dist(EchoPin2, TrigPin2);
     float temperature = dht.readTemperature();
     float humidity = dht.readHumidity();
+    lcd.clear();
 
+    // Display ultrasound information on the first line
     lcd.setCursor(0, 0);
-    lcd.print("F:"); lcd.print(D1); lcd.print("cm B:"); lcd.print(D2); lcd.print("cm  ");
-    lcd.setCursor(0, 1);
-    lcd.print("T:"); lcd.print(temperature); lcd.print("C H:"); lcd.print(humidity); lcd.print("%  ");
+    lcd.print("F:"); lcd.print(D1); lcd.print("cm B:"); lcd.print(D2); lcd.print ("cm  ");
 
+    String tempMessage = "T: " + String(temperature) + "C H: " + String(humidity) + "% - ";
+    Blynk.virtualWrite(V1, temperature); //send data to the phone also
+    Blynk.virtualWrite(V6, humidity);
+    if (temperature > 30) {
+        tempMessage += "Hot weather. Drink more water.";
+    } else if (temperature < 20) {
+        tempMessage += "Quite cool tdy. Stay warm.";
+    } else {
+        tempMessage += "Temperature is moderate.";
+    }
+    
+    // Display temperature & humidity message on the second line
+    lcd.setCursor(0, 1); 
+    scrollText(tempMessage);  
+    
     if (D1 < 6 || D2 < 6) {
         playTone(melody[1], noteDurations[1]);
         brake();
     }
 }
 
+//ultrasound sensor
 int Dist(int EchoPin, int TrigPin) {
     digitalWrite(TrigPin, LOW);
     delayMicroseconds(2);
@@ -136,11 +148,7 @@ int Dist(int EchoPin, int TrigPin) {
     return pulseIn(EchoPin, HIGH) / 58;
 }
 
-BLYNK_WRITE(V2) { if (param.asInt() == 1) forward(); else brake(); }
-BLYNK_WRITE(V3) { if (param.asInt() == 1) backward(); else brake(); }
-BLYNK_WRITE(V4) { if (param.asInt() == 1) left(); else brake(); }
-BLYNK_WRITE(V5) { if (param.asInt() == 1) right(); else brake(); }
-
+//motor
 void forward() { motorControl(100, 0, 100, 0, "Forward"); }
 void backward() { motorControl(0, 100, 0, 100, "Backward"); }
 void left() { motorControl(100, 0, 80, 0, "Left"); }
@@ -155,6 +163,7 @@ void motorControl(int in1, int in2, int in3, int in4, const char* direction) {
     Serial.println(direction);
 }
 
+//buzzer
 void playTone(int frequency, int duration) {
     unsigned long start = millis();
     int period = 1000000 / frequency;
@@ -167,6 +176,7 @@ void playTone(int frequency, int duration) {
     }
 }
 
+//target board interrupt
 void lightInterrupt() {
     unsigned long currentTime = millis();
     if (currentTime - lastInterruptTime > debounceDelay) {
@@ -175,4 +185,34 @@ void lightInterrupt() {
         lastInterruptTime = currentTime;
     }
 }
+
+//lcd display
+void scrollText(String text) {
+    int len = text.length();
+
+    // If the text fits within 16 characters, just print it
+    if (len <= 16) {
+        lcd.setCursor(0, 0);
+        lcd.print(text);
+        return;
+    }
+
+    // Scroll from right to left for longer text
+    for (int i = 0; i <= len - 16; i++) {
+        lcd.setCursor(0, 0);
+        lcd.print(text.substring(i, i + 16)); // Display 16 characters at a time
+        delay(250);  // Adjust scroll speed
+        lcd.clear(); // Clears previous characters to prevent overlapping
+    }
+}
+
+//blynk functions
+BLYNK_WRITE(V2) { if (param.asInt() == 1) forward(); else brake(); }
+BLYNK_WRITE(V3) { if (param.asInt() == 1) backward(); else brake(); }
+BLYNK_WRITE(V4) { if (param.asInt() == 1) left(); else brake(); }
+BLYNK_WRITE(V5) { if (param.asInt() == 1) right(); else brake(); }
+
+
+
+
 
