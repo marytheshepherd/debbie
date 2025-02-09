@@ -55,10 +55,7 @@ bool lightChanged = false;
 void lightInterrupt(void);
 unsigned long lastInterruptTime = 0;
 unsigned long debounceDelay = 200;
-unsigned long debounceDelay2 = 200;
 unsigned long startMillis;   
-const long waitTime = 5000;  
-bool hasPrinted = false;
 
 //set up function
 void setup() {
