@@ -164,8 +164,6 @@ int Dist(int EchoPin, int TrigPin) {
 }
 
 BLYNK_WRITE(V2) {
-
-  
   int state = param.asInt();
   if (state == 1) {
     forward();
@@ -211,7 +209,6 @@ BLYNK_WRITE(V5) {
 }
 
 void forward() {
- 
   analogWrite(motorIN1, 100 );
   digitalWrite(motorIN2, LOW);
   analogWrite(motorIN3, 100);
@@ -230,7 +227,7 @@ void backward() {
 }
 
 void left() {
- analogWrite(motorIN1, 100 );
+  analogWrite(motorIN1, 100 );
   digitalWrite(motorIN2, LOW);
   analogWrite(motorIN3, 80);
   digitalWrite(motorIN4,LOW);
@@ -239,7 +236,6 @@ void left() {
 }
 
 void right() {
-  
   analogWrite(motorIN1,80 );
   digitalWrite(motorIN2, LOW);
   analogWrite(motorIN3, 100);
@@ -280,14 +276,5 @@ void lightInterrupt() {
   }
 }
 
-void lightInterrupt2() {
-  unsigned long currentTime2 = millis();
-  delay(1000);
-  if (currentTime2 - lastInterruptTime2 > debounceDelay2) { // Ignore fast repeats
-  delay(1000);
-    lightA = !lightA; // Toggle light state
-    lightChanged2 = true;
-    lastInterruptTime2 = currentTime2;
-}
-}
+
 
