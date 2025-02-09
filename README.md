@@ -32,7 +32,7 @@ paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src
 
 If it doesn't work, you can simply download "Blynk.zip" and extract it to C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\  
 
-[!CAUTION]  
+> [!CAUTION]  
 The ESP8266 (ESP-01) baud rate *must* be set to 9600, while the Serial.begin()/Serial Monitor baud rates can be either 9600 or 115200.
 The code is currently at its maximum and will overload if added more  
 Beware of damaging your components  
