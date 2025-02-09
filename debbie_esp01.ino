@@ -34,9 +34,9 @@
 char ssid[] = "";  // Wi-Fi SSID
 char pass[] = "";  // Wi-Fi Password
 
-#define BLYNK_TEMPLATE_ID ""
-#define BLYNK_TEMPLATE_NAME ""
-#define BLYNK_AUTH_TOKEN ""
+#define BLYNK_TEMPLATE_ID "TMPL6D_Ndf1NJ"
+#define BLYNK_TEMPLATE_NAME "debbie8266"
+#define BLYNK_AUTH_TOKEN "h6AI52r9E2B-WdBFWrVzLU39LppFhuRV"
 
 SoftwareSerial EspSerial(12, 13);  // Software Serial for ESP8266
 #define ESP8266_BAUD 9600
@@ -66,9 +66,13 @@ bool hasPrinted = false;
 
 //set up function
 void setup() {
+    Serial.begin(115200);
+
     lcd.init();
     lcd.backlight();
-    Serial.begin(115200);
+    updateLCD("Starting..."); //try running for introduction
+    delay(2000);
+
     EspSerial.begin(ESP8266_BAUD);
     delay(10);
     Blynk.begin(BLYNK_AUTH_TOKEN, wifi, ssid, pass);
@@ -89,7 +93,6 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(Bpin), lightInterrupt, CHANGE);
 }
 
-//main loop
 void loop() {
     Blynk.run();
     unsigned long currentMillis = millis();
