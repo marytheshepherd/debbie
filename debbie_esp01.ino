@@ -4,6 +4,15 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <DHT.h>
+
+//wifi configuration
+char ssid[] = "";  // Wi-Fi SSID
+char pass[] = "";  // Wi-Fi Password
+
+#define BLYNK_TEMPLATE_ID "TMPL6D_Ndf1NJ"
+#define BLYNK_TEMPLATE_NAME "debbie8266"
+#define BLYNK_AUTH_TOKEN "h6AI52r9E2B-WdBFWrVzLU39LppFhuRV"
+
 #include <ESP8266_Lib.h>
 #include <BlynkSimpleShieldEsp8266.h>
 
@@ -30,13 +39,7 @@
 #define NOTE_A4  440
 #define NOTE_B4  494
 
-//wifi configuration
-char ssid[] = "";  // Wi-Fi SSID
-char pass[] = "";  // Wi-Fi Password
 
-#define BLYNK_TEMPLATE_ID "TMPL6D_Ndf1NJ"
-#define BLYNK_TEMPLATE_NAME "debbie8266"
-#define BLYNK_AUTH_TOKEN "h6AI52r9E2B-WdBFWrVzLU39LppFhuRV"
 
 SoftwareSerial EspSerial(12, 13);  // Software Serial for ESP8266
 #define ESP8266_BAUD 9600
@@ -45,11 +48,11 @@ ESP8266 wifi(&EspSerial);
 
 //initialization
 int melody[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4};
-int noteDurations[] = { 500, 500, 500, 500, 500, 500, 500 };
+int noteDurations[] = { 500 };
 DHT dht(DHT11_PIN, DHT11);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long previousMillis = 0;
-const long interval = 2000;
+const long interval = 4000;
 int lightB =0;
 bool lightChanged = false;
 void lightInterrupt(void);
@@ -63,7 +66,6 @@ void setup() {
 
     lcd.init();
     lcd.backlight();
-    scrollText("Starting..."); //try updatelcd or lcdprint if fail
     delay(2000);
 
     EspSerial.begin(ESP8266_BAUD);
@@ -113,21 +115,11 @@ void updateSensors() {
     // Display ultrasound information on the first line
     lcd.setCursor(0, 0);
     lcd.print("F:"); lcd.print(D1); lcd.print("cm B:"); lcd.print(D2); lcd.print ("cm  ");
+    lcd.setCursor(0, 1);
+    lcd.print("T:"); lcd.print(temperature); lcd.print("C H:"); lcd.print(humidity); lcd.print("%");
 
-    String tempMessage = "T: " + String(temperature) + "C H: " + String(humidity) + "% - ";
-    Blynk.virtualWrite(V1, temperature); //send data to the phone also
+    Blynk.virtualWrite(V1, temperature); //send data to the blynk 
     Blynk.virtualWrite(V6, humidity);
-    if (temperature > 30) {
-        tempMessage += "Hot weather. Drink more water.";
-    } else if (temperature < 20) {
-        tempMessage += "Quite cool tdy. Stay warm.";
-    } else {
-        tempMessage += "Temperature is moderate.";
-    }
-    
-    // Display temperature & humidity message on the second line
-    lcd.setCursor(0, 1); 
-    scrollText(tempMessage);  
     
     if (D1 < 6 || D2 < 6) {
         playTone(melody[1], noteDurations[1]);
@@ -180,26 +172,6 @@ void lightInterrupt() {
         lightB = digitalRead(Bpin) == LOW;  // Detect: resitance HIGH dark, LOW = bright
         lightChanged = true;
         lastInterruptTime = currentTime;
-    }
-}
-
-//lcd display
-void scrollText(String text) {
-    int len = text.length();
-
-    // If the text fits within 16 characters, just print it
-    if (len <= 16) {
-        lcd.setCursor(0, 0);
-        lcd.print(text);
-        return;
-    }
-
-    // Scroll from right to left for longer text
-    for (int i = 0; i <= len - 16; i++) {
-        lcd.setCursor(0, 0);
-        lcd.print(text.substring(i, i + 16)); // Display 16 characters at a time
-        delay(250);  // Adjust scroll speed
-        lcd.clear(); // Clears previous characters to prevent overlapping
     }
 }
 
