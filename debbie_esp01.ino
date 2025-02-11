@@ -32,12 +32,12 @@ char pass[] = "";  // Wi-Fi Password
 
 //notes
 #define NOTE_C4  262
-#define NOTE_D4  294
-#define NOTE_E4  330
-#define NOTE_F4  349
-#define NOTE_G4  392
-#define NOTE_A4  440
-#define NOTE_B4  494
+// #define NOTE_D4  294
+// #define NOTE_E4  330
+// #define NOTE_F4  349
+// #define NOTE_G4  392
+// #define NOTE_A4  440
+// #define NOTE_B4  494
 
 
 
@@ -47,8 +47,8 @@ ESP8266 wifi(&EspSerial);
 
 
 //initialization
-int melody[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4};
-int noteDurations[] = { 500 };
+// int melody[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4};
+// int noteDurations[] = { 500 };
 DHT dht(DHT11_PIN, DHT11);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long previousMillis = 0;
@@ -124,7 +124,7 @@ void updateSensors() {
     //add blynk event here
     
     if (D1 < 6 || D2 < 6) {
-        playTone(melody[1], noteDurations[1]);
+        playTone(NOTE_C4, 500);
         brake();
     }
 }
