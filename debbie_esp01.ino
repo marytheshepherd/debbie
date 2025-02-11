@@ -150,9 +150,9 @@ void brake() { motorControl(0, 0, 0, 0, "Brake"); }
 
 void motorControl(int in1, int in2, int in3, int in4, const char* direction) {
     analogWrite(motorIN1, in1);
-    digitalWrite(motorIN2, in2);
+    analogWrite(motorIN2, in2);
     analogWrite(motorIN3, in3);
-    digitalWrite(motorIN4, in4);
+    analogWrite(motorIN4, in4);
     Serial.println(direction);
 }
 
