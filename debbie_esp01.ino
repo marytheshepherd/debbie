@@ -120,6 +120,8 @@ void updateSensors() {
 
     Blynk.virtualWrite(V1, temperature); //send data to the blynk 
     Blynk.virtualWrite(V6, humidity);
+    Blynk.virtualWrite(V14, D1);
+    Blynk.virtualWrite(V15, D2);
 
     //add blynk event here
     
