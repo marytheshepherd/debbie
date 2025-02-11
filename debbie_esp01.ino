@@ -113,13 +113,15 @@ void updateSensors() {
     lcd.clear();
 
     // Display ultrasound information on the first line
-    lcd.setCursor(0, 0);
+    lcd.setCursor(0, 0); //can remove this if blynk event work
     lcd.print("F:"); lcd.print(D1); lcd.print("cm B:"); lcd.print(D2); lcd.print ("cm  ");
     lcd.setCursor(0, 1);
     lcd.print("T:"); lcd.print(temperature); lcd.print("C H:"); lcd.print(humidity); lcd.print("%");
 
     Blynk.virtualWrite(V1, temperature); //send data to the blynk 
     Blynk.virtualWrite(V6, humidity);
+
+    //add blynk event here
     
     if (D1 < 6 || D2 < 6) {
         playTone(melody[1], noteDurations[1]);
