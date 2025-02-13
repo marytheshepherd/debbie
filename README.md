@@ -23,7 +23,9 @@ Buzzer
 ```
 ESP is not responding
 ```
-Restart your robot or change laptop(some laptops don't have default file path configured) /hotspot(might be network error)  
+Restart your robot  
+Change laptop(some laptops don't have default file path configured)  
+Change hotspot(might be network error)  
 Change SoftwareSerial EspSerial(12, 13); to different ports e.g. (2,3)  
 ```
 Compilation error: ESP8266_Lib.h: No such file or directory
