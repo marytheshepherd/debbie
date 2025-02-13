@@ -50,7 +50,7 @@ void setup() {
     lcd.init();
     lcd.backlight();
     lcd.setCursor(0,0);
-    lcd.print("This is debbie:)");
+    lcd.print("this is debbie:)");
     delay(3000);
     lcd.clear();
 
@@ -77,7 +77,7 @@ int Dist(int EchoPin, int TrigPin) {
     digitalWrite(TrigPin, LOW);
     delayMicroseconds(2);
     digitalWrite(TrigPin, HIGH);
-    delayMicroseconds(10);
+    delayMicroseconds(6);
     digitalWrite(TrigPin, LOW);
     long pulseDuration = pulseIn(EchoPin, HIGH);
     return pulseDuration / 58;
@@ -86,9 +86,9 @@ int Dist(int EchoPin, int TrigPin) {
 //motor
 void forward() { motorControl(0, 100, 100, 0, "Forward"); }
 void backward() { motorControl(100, 0, 0, 100, "Backward"); }
-void left() { motorControl(100, 0, 80, 0, "Right"); }
+void left() { motorControl(0, 120, 80, 0, "Right"); }
 void right() { motorControl(0, 80, 100, 0, "Left"); }
-void brake() { motorControl(0, 0, 0, 0, "Brake"); }
+void brake() { motorControl(255, 255, 255, 255, "Brake"); }
 
 void motorControl(int in1, int in2, int in3, int in4, const char* direction) {
     analogWrite(motorIN1, in1);
@@ -136,12 +136,20 @@ void loop() {
     
   
     Blynk.run();
+
+    //buzzer
+    int D1 = Dist(EchoPin1, TrigPin1);
+    int D2 = Dist(EchoPin2, TrigPin2);
+    if (D1 < 12 || D2 < 12) {
+        brake();
+        playTone(NOTE_C4, 500);     
+    }
+
+    
     unsigned long currentMillis = millis();
     if (currentMillis - previousMillis >= interval) {
-      previousMillis = currentMillis;
-    
-      int D1 = Dist(EchoPin1, TrigPin1);
-      int D2 = Dist(EchoPin2, TrigPin2);
+      previousMillis = currentMillis;    
+      
       float temperature = dht.readTemperature();
       float humidity = dht.readHumidity();
     
@@ -150,12 +158,6 @@ void loop() {
       Blynk.virtualWrite(V6, humidity);
       Blynk.virtualWrite(V14, D1);
       Blynk.virtualWrite(V15, D2);
-
-    //buzzer
-      if (D1 < 6 || D2 < 6) {
-        playTone(NOTE_C4, 500);
-        brake();
-    }
 
     //target board sensor
       if (lightChanged) {
