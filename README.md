@@ -11,14 +11,7 @@ __How can we help individuals in Singapore combat loneliness through the use of 
 **Ultrasounic sensor** *2 : *Detect obstacles in debbie’s path; when an obstacle is detected, the buzzer sounds, and debbie stops moving even if commands are sent from the app.*  
 **Buzzer** : *Sounds when an obstacle is detected by the ultrasonic sensors*  
 **Target Board** *1 : *Detects flashlight (representing darkness). When detected, LED automatically turns on; when the flashlight is removed (representing a well-lit room), the LED turns off.*  
-**Temperature & Humidity Sensor** [*DHT sensor library by Adafruit] : *Measures and sends temperature and humidity data to the Blynk app.*  
-
-
-
-## Component Functions
-debbie will introduce itself via lcd during initial set up. then the face will appear throughout. 
-movement is remote controlled from blynk software. ultrasonic sensors will detect obstacles and when detected buzzer will sound. debbie will be brought to a halt even when movement command is given from the software. temperature and humidity values are shown on blynk app.
-target Board will detect flashlight (represent darkness) then led will automatically turn on. when flashlight is removed (represent back to well-lit room) then led will automatically turn off. 
+**Temperature & Humidity Sensor** [*DHT sensor library by Adafruit] : *Measures and sends temperature and humidity data to the Blynk app.*   
 
 ## Usage
 1) Test all the hardware seperately.  
