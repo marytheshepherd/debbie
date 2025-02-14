@@ -21,9 +21,9 @@ It aims to develop a desk-stationed companion robot, debbie, designed to combat 
 ```
 ESP is not responding
 ```
-Restart your robot  
-Change laptop(some laptops don't have default file path configured)  
-Change hotspot(might be network error)  
+Verify hardware connections are not loose and reupload the code    
+Change laptop : some laptops don't have default file path configured  
+Change hotspot : possible network error   
 Change SoftwareSerial EspSerial(12, 13); to different ports e.g. (2,3)  
 ```
 Compilation error: ESP8266_Lib.h: No such file or directory
@@ -31,6 +31,10 @@ Compilation error: ESP8266_Lib.h: No such file or directory
 download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
 paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
 
+```
+Buffer overflow
+```
+Don't press the buttons continuously. Be patient.  
 
 > [!CAUTION]  
 The ESP8266 (ESP-01) baud rate *must* be set to 9600, while the Serial.begin()/Serial Monitor baud rates can be either 9600 or 115200.
