@@ -4,7 +4,7 @@ It aims to develop a desk-stationed companion robot, Debbie, designed to combat 
   
 __How can we help individuals in Singapore combat loneliness through the use of technology? (UNSDG 3)__
 
-## Component Lists and functions
+## Component Lists and Functions
 **WiFi & Blynk IoT** [*Blynk by Volodymyr]  
 **LCD screen** : *Displays an introductory message from debbie during setup, followed by display of its face.*    
 **Motor** : *Controls the movement of debbie, which is managed remotely through the Blynk software.*    
