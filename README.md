@@ -6,12 +6,19 @@ __How can we help individuals in Singapore combat loneliness through the use of 
 
 ## Component Lists
 WiFi & Blynk IoT [*Blynk by Volodymyr]  
-Motor  
-Ultrasound *2  
-Target Board *1  
-LCD screen  
-Temperature & Humidity Sensor [*DHT sensor library by Adafruit]  
-Buzzer  
+LCD screen : Displays an introductory message from debbie during setup, followed by display of its face.    
+Motor : Controls the movement of debbie, which is managed remotely through the Blynk software.    
+Ultrasounic sensor *2 : Detect obstacles in debbie’s path; when an obstacle is detected, the buzzer sounds, and debbie stops moving even if commands are sent from the app.  
+Buzzer : Sounds when an obstacle is detected by the ultrasonic sensors  
+Target Board *1 : Detects flashlight (representing darkness). When detected, LED automatically turns on; when the flashlight is removed (representing a well-lit room), the LED turns off.  
+Temperature & Humidity Sensor [*DHT sensor library by Adafruit] : Measures and sends temperature and humidity data to the Blynk app.  
+
+
+
+## Component Functions
+debbie will introduce itself via lcd during initial set up. then the face will appear throughout. 
+movement is remote controlled from blynk software. ultrasonic sensors will detect obstacles and when detected buzzer will sound. debbie will be brought to a halt even when movement command is given from the software. temperature and humidity values are shown on blynk app.
+target Board will detect flashlight (represent darkness) then led will automatically turn on. when flashlight is removed (represent back to well-lit room) then led will automatically turn off. 
 
 ## Usage
 1) Test all the hardware seperately.  
@@ -32,6 +39,7 @@ Compilation error: ESP8266_Lib.h: No such file or directory
 ```
 download https://github.com/vshymanskyy/BlynkESP8266/blob/master/ESP8266_Lib.h  
 paste in C:\Users\(yourname)\OneDrive\Documents\Arduino\libraries\Blynk\src  
+
 
 > [!CAUTION]  
 The ESP8266 (ESP-01) baud rate *must* be set to 9600, while the Serial.begin()/Serial Monitor baud rates can be either 9600 or 115200.
