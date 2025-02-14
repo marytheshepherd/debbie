@@ -6,12 +6,12 @@ __How can we help individuals in Singapore combat loneliness through the use of 
 
 ## Component Lists and functions
 **WiFi & Blynk IoT** [*Blynk by Volodymyr]  
-**LCD screen** : Displays an introductory message from debbie during setup, followed by display of its face.    
-**Motor** : Controls the movement of debbie, which is managed remotely through the Blynk software.    
-**Ultrasounic sensor** *2 : Detect obstacles in debbie’s path; when an obstacle is detected, the buzzer sounds, and debbie stops moving even if commands are sent from the app.  
-**Buzzer** : Sounds when an obstacle is detected by the ultrasonic sensors  
-**Target Board** *1 : Detects flashlight (representing darkness). When detected, LED automatically turns on; when the flashlight is removed (representing a well-lit room), the LED turns off.  
-**Temperature & Humidity Sensor** [*DHT sensor library by Adafruit] : Measures and sends temperature and humidity data to the Blynk app.  
+**LCD screen** : *Displays an introductory message from debbie during setup, followed by display of its face.*    
+**Motor** : *Controls the movement of debbie, which is managed remotely through the Blynk software.*    
+**Ultrasounic sensor** *2 : *Detect obstacles in debbie’s path; when an obstacle is detected, the buzzer sounds, and debbie stops moving even if commands are sent from the app.*  
+**Buzzer** : *Sounds when an obstacle is detected by the ultrasonic sensors*  
+**Target Board** *1 : *Detects flashlight (representing darkness). When detected, LED automatically turns on; when the flashlight is removed (representing a well-lit room), the LED turns off.*  
+**Temperature & Humidity Sensor** [*DHT sensor library by Adafruit] : *Measures and sends temperature and humidity data to the Blynk app.*  
 
 
 
