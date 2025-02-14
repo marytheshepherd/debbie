@@ -13,7 +13,7 @@ It aims to develop a desk-stationed companion robot, debbie, designed to combat 
 
 ## Usage
 1) Test all the hardware seperately.  
-2) Create Blynk account >> template >> Hardware: ESP8266 | Connection type: WiFi >> New Devices >> add from template    
+2) Create Blynk account >> templates >> Hardware: ESP8266 | Connection type: WiFi >> New Devices >> add from template    
 3) debbie_esp01_v3.ino
 4) Blynk template id, name, auth token and personal hotspot  
 
